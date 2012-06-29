@@ -272,11 +272,16 @@ class ResourceTagLib {
         }
         
         needsResourceLayout()
-        
-        def trk = request.resourceModuleTracker
-        if (!trk) {
-            declareModuleRequiredByPage(ResourceProcessor.IMPLICIT_MODULE, false)
-        }
+
+// XXX DC Uncomment these lines when a better fix is discovered
+// These lines were causing all pages to require the "implicit module", which
+// appears to include all resources linked to using r:external.  This caused
+// various undesirable behaviors, such as page-specific CSS and JS files being
+// loaded by every page after the first page view that included them.        
+//        def trk = request.resourceModuleTracker
+//        if (!trk) {
+//            declareModuleRequiredByPage(ResourceProcessor.IMPLICIT_MODULE, false)
+//        }
         
         def mandatory = attrs.strict == null ? true : attrs.strict.toString() != 'false'
         def moduleNames
